@@ -16,15 +16,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private TrailRenderer tr;
 
-    private void Start() {
-    
+    private void Start()
+    {
+
         rb.GetComponent<Rigidbody>();
-        tr.emitting = false;
+        tr.emitting = true;
 
     }
 
 
-    void Update(){
+    void Update()
+    {
 
         // Movimento no eixo X
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -34,23 +36,26 @@ public class PlayerController : MonoBehaviour
         newPosition.x = Mathf.Clamp(newPosition.x, -xBound, xBound);
         transform.position = newPosition;
 
-        if(Input.GetKeyDown(KeyCode.Space ) && turbo){
+        if (Input.GetKeyDown(KeyCode.Space) && turbo)
+        {
             StartCoroutine(Turbo());
         }
 
 
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
 
         rb.linearVelocity = Vector3.forward * speed;
     }
 
-    private IEnumerator Turbo(){
+    private IEnumerator Turbo()
+    {
         turbo = true;
         tr.emitting = true;
 
-        speed =  turboForca;
+        speed = turboForca;
         yield return new WaitForSeconds(turboTempo);
         speed = 10f;
         yield return new WaitForSeconds(turboCooldown);

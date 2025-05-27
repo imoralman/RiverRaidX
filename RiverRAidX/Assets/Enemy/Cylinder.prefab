@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7582362764894926254}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cfaf6fbd36c109d458b06b3e7e1cd036, type: 2}
+  - {fileID: 2100000, guid: 58da41fd4446bf24db9b30f6b17c16aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

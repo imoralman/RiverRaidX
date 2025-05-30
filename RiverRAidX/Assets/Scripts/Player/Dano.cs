@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Dano : MonoBehaviour
@@ -11,6 +12,7 @@ public class Dano : MonoBehaviour
 
     public GameObject _model;
 
+
     private void Start()
     {
         _vidaAtual = _vidaMax;
@@ -20,31 +22,34 @@ public class Dano : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+  
+        
         if (_invincible)
         {
             return;
         }
 
         if (other.CompareTag("Inimigo"))
-            {
+        {
             //    _vidaAtual--;
             //fazer aniamcao para aviao tremer
             //fazer script para tremer tela
             Debug.Log("Bateu");
 
-            if (_vidaAtual <= 0)
-            {
-                _vidaAtual--;
-                StartCoroutine(Blinking(_tempoInvencivel));
-                
-                //game over
-            }
-            else
-            {
+                if (_vidaAtual <= 0)
+                {
+                    _vidaAtual--;
+                    StartCoroutine(Blinking(_tempoInvencivel));
 
-                
-            }  
-            }
+                    //game over
+                }
+                else
+                {
+
+
+                } 
+
+        }
     }
     IEnumerator Blinking(float _time)
     {

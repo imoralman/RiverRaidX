@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Inimigo
   - Gasolina
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

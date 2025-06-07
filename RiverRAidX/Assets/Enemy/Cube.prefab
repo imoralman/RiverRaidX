@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6003328858449011117}
   - component: {fileID: 8732395209256828555}
   - component: {fileID: 7299980714508358085}
+  - component: {fileID: -7520839322024883754}
+  - component: {fileID: -5844840078895141698}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Inimigo
@@ -108,3 +110,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7520839322024883754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4932891611853869799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16aa38e0c68bdc04d81466005ab480e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 5
+  _minPauseTime: 0.5
+  _maxPauseTime: 1.5
+  _containerTamanho: {x: 45, y: 0, z: 0}
+--- !u!114 &-5844840078895141698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4932891611853869799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1cd58843155214cb510cd05183739c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanciaTiro: 15
+  _tiroCooldown: 3

@@ -52,7 +52,7 @@ public class Coisao : MonoBehaviour
     
 
             _invincible = true;
-            float elapsed = 0f;
+            float elapsed = 0;
             float blinkInterval = 0.05f;
 
 

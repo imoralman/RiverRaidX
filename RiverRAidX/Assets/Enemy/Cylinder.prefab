@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4947844427402228935}
   - component: {fileID: 6198219926515705704}
   - component: {fileID: 7582362764894926254}
+  - component: {fileID: 4774252225937261322}
+  - component: {fileID: 5923176822332267518}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Inimigo
@@ -27,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4237773823891309443}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.6220636, y: 0, z: 114.806656}
+  m_LocalRotation: {x: -3.2814845e-11, y: 0.74007344, z: -2.9819792e-11, w: 0.67252606}
+  m_LocalPosition: {x: -18.05, y: -2.51, z: 19.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,3 +112,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &4774252225937261322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237773823891309443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16aa38e0c68bdc04d81466005ab480e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 7
+  _minPauseTime: 0.5
+  _maxPauseTime: 1.5
+  _containerTamanho: {x: 45, y: 0, z: 0}
+--- !u!114 &5923176822332267518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237773823891309443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1cd58843155214cb510cd05183739c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanciaTiro: 15
+  _tiroCooldown: 3.5

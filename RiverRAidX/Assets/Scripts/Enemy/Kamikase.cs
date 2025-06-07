@@ -3,10 +3,10 @@ using UnityEngine;
 public class Kamikaze : MonoBehaviour
 {
     [Header("Detecção")]
-    public float detectionRadius = 10f;
+    public float detectionRadius;
 
     [Header("Movimento")]
-    public float chargeSpeed = 15f;
+    public float chargeSpeed;
 
     [Header("Explosão")]
     public bool destroyOnHit = true;
@@ -41,7 +41,7 @@ public class Kamikaze : MonoBehaviour
 
             // Faz o inimigo olhar para o jogador suavemente
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
 
             // Move em frente, na direção que está olhando
             transform.position += transform.forward * chargeSpeed * Time.deltaTime;

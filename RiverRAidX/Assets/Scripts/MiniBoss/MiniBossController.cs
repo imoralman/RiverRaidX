@@ -2,90 +2,90 @@ using UnityEngine;
 
 public class MinibossController : MonoBehaviour
 {
-    [Header("Distância do Jogador")]
+    [Header("Distância do jogador no eixo Z")]
     public float _distanciaDoPlayer = 20f;
-    public float approachSpeed = 10f;
 
     [Header("Movimento lateral")]
-    public float _movimentoEmX = 10f;
-    public float _velocidadeEmX = 5f;
+    public float xMoveRange = 10f;
+    public float xMoveSpeed = 5f;
 
     [Header("Ataque")]
-    public float _attackInterval = 3f;
-    public float _duracaoDoAtaque = 1.5f;
+    public float attackInterval = 3f;
+    public float attackDuration = 1.5f;
 
     private Transform player;
-    private Vector3 _posicaoInicial;
-    private bool _atacando = false;
-    private float _tempoDeAtaque = 0f;
-    private float _esperaParaAtacar;
-
-    private int _direcao = 1;
+    private Vector3 initialLocalPosition;
+    private float attackCooldown = 0f;
+    private bool attacking = false;
+    private int direction = 1;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        _posicaoInicial = transform.position;
-        _esperaParaAtacar = Random.Range(0, _attackInterval); // Desincronizar ataques
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        initialLocalPosition = transform.localPosition;
+        attackCooldown = Random.Range(0f, attackInterval); // Para desincronizar
     }
 
     void Update()
     {
         if (player == null) return;
 
-        MaintainDistanceFromPlayer();
+        FollowPlayerZ();
 
-        if (!_atacando)
+        if (!attacking)
         {
             MoveSideToSide();
-            _esperaParaAtacar -= Time.deltaTime;
+            attackCooldown -= Time.deltaTime;
 
-            if (_esperaParaAtacar <= 0f)
+            if (attackCooldown <= 0f)
             {
                 StartCoroutine(Attack());
             }
         }
+
+        LookAtPlayer();
     }
 
-    void MaintainDistanceFromPlayer()
+    void FollowPlayerZ()
     {
-        float currentDistance = Vector3.Distance(transform.position, player.position);
-        Vector3 _direcao = (transform.position - player.position).normalized;
-
-        if (Mathf.Abs(currentDistance - _distanciaDoPlayer) > 1f)
-        {
-            transform.position -= _direcao * approachSpeed * Time.deltaTime;
-        }
-
-        // Olhar para o player
-        Vector3 lookDir = (player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(lookDir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        // Segue o jogador mantendo distância no Z, mas não altera X/Y
+        Vector3 pos = transform.position;
+        pos.z = player.position.z + _distanciaDoPlayer;
+        transform.position = pos;
     }
 
     void MoveSideToSide()
     {
         Vector3 newPos = transform.position;
-        newPos.x += _direcao * _velocidadeEmX * Time.deltaTime;
+        newPos.x += direction * xMoveSpeed * Time.deltaTime;
 
-        if (Mathf.Abs(newPos.x - _posicaoInicial.x) > _movimentoEmX)
+        if (Mathf.Abs(newPos.x - initialLocalPosition.x) > xMoveRange)
         {
-            _direcao *= -1;
+            direction *= -1;
         }
 
         transform.position = newPos;
     }
 
+    void LookAtPlayer()
+    {
+        Vector3 lookDir = (player.position - transform.position).normalized;
+        lookDir.y = 0f; // opcional: trava rotação no Y
+        Quaternion targetRotation = Quaternion.LookRotation(-lookDir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
+    }
+
     System.Collections.IEnumerator Attack()
     {
-        _atacando = true;
-        Debug.Log($"{gameObject.name} está atacando!");
-        // Aqui você pode ativar tiros, lasers, etc.
+        attacking = true;
 
-        yield return new WaitForSeconds(_duracaoDoAtaque);
+        // Ativaria tiros aqui
+        Debug.Log($"{gameObject.name} atacando!");
 
-        _atacando = false;
-        _esperaParaAtacar = _attackInterval;
+        yield return new WaitForSeconds(attackDuration);
+
+        attacking = false;
+        attackCooldown = attackInterval;
     }
 
     public void Die()
@@ -93,5 +93,13 @@ public class MinibossController : MonoBehaviour
         Debug.Log($"{gameObject.name} morreu!");
         gameObject.SetActive(false);
         MinibossSpawner.Instance.NotifyMinibossDeath();
+    }
+
+    void OnEnable()
+    {
+        attacking = false;
+        attackCooldown = Random.Range(0f, attackInterval);
+        direction = 1;
+        initialLocalPosition = transform.localPosition;
     }
 }
